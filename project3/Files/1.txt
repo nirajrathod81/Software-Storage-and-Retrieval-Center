@@ -1,0 +1,26 @@
+ namespace WindowsFormsApplication1
+    {
+        public partial class Form1 : Form
+        {
+            public Form1()
+            {
+                InitializeComponent();
+            }
+
+            private void textBox2_TextChanged(object sender, EventArgs e)
+            {
+            }
+
+            private void submit_Click(object sender, EventArgs e)                
+            {      
+                OleDbConnection cnon = new OleDbConnection();
+                cnon.ConnectionString =@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\visual_c\Database71.accdb";
+                OleDbCommand command = new OleDbCommand();
+                command.CommandText = "INSERT INTO electricity (Asset_name,Asset_number)VALUES('" + textBox1.Text + "','" + textBox2.Text + "')";
+                cnon.Open();
+                command.Connection = cnon;
+                command.ExecuteNonQuery();
+                cnon.Close();
+            }
+        }
+    }
